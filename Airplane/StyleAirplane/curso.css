@@ -1,0 +1,104 @@
+/* Curso detalle */
+.curso-detalle {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 18px 40px 18px;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 24px rgba(44,62,80,0.07);
+}
+.curso-detalle h1 {
+    color: #2980b9;
+    text-align: center;
+    margin-bottom: 18px;
+}
+.curso-info-grid {
+    display: flex;
+    gap: 32px;
+    justify-content: space-between;
+    margin: 38px 0 28px 0;
+    flex-wrap: wrap;
+}
+.curso-info-grid > div {
+    background: #fafdff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.04);
+    padding: 22px 18px;
+    min-width: 260px;
+    flex: 1 1 0;
+}
+.curso-info-grid h2 {
+    color: #2980b9;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+.curso-info-grid ul, .curso-info-grid ol {
+    margin: 0 0 0 18px;
+    padding: 0;
+    color: #4a4647;
+    font-size: 1em;
+}
+.curso-info-grid li {
+    margin-bottom: 7px;
+}
+.curso-extra {
+    margin-top: 36px;
+    background: #f1f6fa;
+    border-radius: 10px;
+    padding: 22px 18px;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.04);
+}
+.curso-extra h2 {
+    color: #2980b9;
+    font-size: 1.08em;
+    margin-bottom: 10px;
+}
+.curso-extra ul {
+    margin: 0 0 0 18px;
+    padding: 0;
+}
+.curso-extra li {
+    margin-bottom: 7px;
+}
+.curso-extra a {
+    color: #2980b9;
+    text-decoration: underline;
+}
+@media (max-width: 900px) {
+    .curso-info-grid {
+        flex-direction: column;
+        gap: 18px;
+    }
+}
+
+/* Controla el tamaño y aspecto de la imagen del banner del curso */
+.curso-banner {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 32px auto;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(44,62,80,0.10);
+}
+
+.curso-banner-img {
+    width: 100%;
+    max-width: 600px;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+    .curso-banner,
+    .curso-banner-img {
+        max-width: 98vw;
+        height: 150px;
+    }
+}
+@media (max-width: 600px) {
+    .curso-banner-img {
+        height: 90px;
+    }
+}

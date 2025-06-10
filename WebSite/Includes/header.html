@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/WebSite/Includes/Style/header.css">
+    <link rel="stylesheet" href="Style/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <title>FlightAir</title>
+</head>
+<body>
+    <!-- Header -->
+    <header class="container-body-head">
+        <div class="titulo-con-logo">
+            <a href="/WebSite/index.php"><h1>FlightAir</h1></a>
+        </div>
+
+        <div class="contenedor-user">
+            <nav class="boton-opciones" id="menu-options">
+                <button id="boton-inicio" onclick="window.location.href='index.php'">Aerolínea</button>
+                
+                <div id="boton-destino">
+                    <button type="button">Aviones</button>
+                    <div class="submenu">
+                        <h2>Modelos</h2>
+                        <a href="/Airplane/airbus.php">Airbus</a>
+                        <a href="/Airplane/boing.php">Boeing</a>
+                        <a href="/Airplane/otros.php">Embraer</a>
+                    </div>
+                </div>
+                
+                <div id="boton-curso">
+                    <button type="button">Curso</button>
+                    <div class="submenu">
+                        <h2>Curso de Piloto</h2>
+                        <a href="/Airplane/curso.php">Sobre o curso</a>
+                        <a href="/Airplane/documentacion.php">Requisitos</a>
+                        <a href="/Airplane/faq.php">Preguntas frecuentes</a>
+                    </div>
+                </div>
+                
+                <div id="boton-examen">
+                    <button type="button">Examen</button>
+                    <div class="submenu">
+                        <h2>Examen</h2>
+                        <a href="/Airplane/simulador.php">Simulador</a>
+                        <a href="/Airplane/resultados.php">Resultados</a>
+                    </div>
+                </div>
+                
+                <div id="boton-requisitos">
+                    <button type="button">Información</button>
+                    <div class="submenu">
+                        <h2>Información</h2>
+                        <a href="/Airplane/documentacion.php">Documentación</a>
+                        <a href="/Airplane/faq.php">Preguntas frecuentes</a>
+                        <a href="/Airplane/contacto.php">Contacto</a>
+                    </div>
+                </div>
+
+                <button id="boton-suscribir" type="button" onclick="abrirModalSuscribir()">Suscribirse</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Modal de Suscripción -->
+    <div id="modal-suscribir" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(44,62,80,0.18); z-index:2000; align-items:center; justify-content:center;">
+        <div style="background:#fff; padding:30px 22px; border-radius:10px; box-shadow:0 4px 24px rgba(44,62,80,0.13); min-width:300px; position:relative;">
+            <button onclick="cerrarModalSuscribir()" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:22px; color:#2980b9; cursor:pointer;">&times;</button>
+            <h2 style="text-align:center; color:#2980b9;">Suscríbete a novedades</h2>
+            <form id="form-suscripcion-header" action="suscribir.php" method="POST">
+                <label for="email-suscripcion-header">Correo electrónico:</label>
+                <input type="email" id="email-suscripcion-header" name="email_suscripcion" required>
+                <button type="submit" id="btn-suscribir-header" style="margin-top:12px;">Suscribirse</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Mostrar/ocultar menú hamburguesa (si tienes uno)
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const menuOptions = document.getElementById('menu-options');
+        if (hamburgerIcon) {
+            hamburgerIcon.addEventListener('click', function() {
+                menuOptions.classList.toggle('active');
+            });
+        }
+
+        // Disminuir el header a 50% durante el scroll
+        document.addEventListener("DOMContentLoaded", function () {
+            const header = document.querySelector(".container-body-head");
+            window.addEventListener("scroll", function () {
+                if (window.scrollY > 50) {
+                    header.classList.add("shrink");
+                } else {
+                    header.classList.remove("shrink");
+                }
+            });
+        });
+
+        // Modal Suscribir
+        function abrirModalSuscribir() {
+            document.getElementById('modal-suscribir').style.display = 'flex';
+        }
+        function cerrarModalSuscribir() {
+            document.getElementById('modal-suscribir').style.display = 'none';
+        }
+        // Cerrar modal al hacer click fuera del contenido
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('modal-suscribir');
+            if (modal && e.target === modal) {
+                cerrarModalSuscribir();
+            }
+        });
+    </script>
+</body>
+</html>
