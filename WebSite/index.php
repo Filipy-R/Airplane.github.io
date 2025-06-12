@@ -89,7 +89,7 @@
             <h2>¿Quieres ser piloto?</h2>
             <p>
                 Conoce los pasos para convertirte en piloto profesional: requisitos, formación, licencias y oportunidades de carrera.<br>
-                <a href="curso.php" class="btn-curso">Ver más sobre el curso de piloto</a>
+                <a href="../Airplane/curso.php" class="btn-curso">Ver más sobre el curso de piloto</a>
             </p>
             <div class="curso-pasos">
                 <div>
