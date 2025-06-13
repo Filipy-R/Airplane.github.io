@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Includes/Style/style.css">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <title>FlightAir - Mundo de Aviones</title>
 </head>
 <body>
     <?php include("Includes/header.html"); ?>
 
-    <!-- Sección fuera del container principal: Banner informativo -->
+    
     <section class="banner-hero">
+
         <div class="banner-hero-content">
             <h2>¿Te apasiona la aviación?</h2>
             <p>
@@ -19,7 +21,13 @@
                 ¡Explora, aprende y déjate inspirar por el mundo de la aviación!
             </p>
         </div>
+        
+        <div id="flightsContainer"></div>
+        <button id="loadMoreBtn" style="display:none;">Seguir</button>
+    </div>
+    <script src="js/llamarVuelos.js"></script>
     </section>
+
 
     <main>
         <section class="bienvenida">
@@ -40,6 +48,10 @@
                     $url = "#";
                     if (strtolower($fab['fab_nom']) == "airbus") $url = "/Airplane/airbus.php";
                     if (strtolower($fab['fab_nom']) == "boeing") $url = "/Airplane/boing.php";
+                    if (strtolower($fab['fab_nom']) == "embraer") $url = "/Airplane/embraer.php";
+                    if (strtolower($fab['fab_nom']) == "bombardier") $url = "/Airplane/bombardier.php";
+                    if (strtolower($fab['fab_nom']) == "otros") $url = "/Airplane/otros.php";
+
                     // Puedes agregar más fabricantes aquí si los tienes
                     echo '<a href="'.$url.'" class="card-modelo">';
                     echo '<img src="'.htmlspecialchars($fab['fab_imagen']).'" alt="'.htmlspecialchars($fab['fab_nom']).'" />';
@@ -48,11 +60,6 @@
                     echo '</a>';
                 }
                 ?>
-                <a href="/Airplane/otros.php" class="card-modelo">
-                    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=400&auto=format&fit=crop" alt="Otros fabricantes" />
-                    <h3>Otros fabricantes</h3>
-                    <p>Embraer, Bombardier y más: el mundo de la aviación es diverso.</p>
-                </a>
             </div>
         </section>
 

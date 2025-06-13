@@ -1,9 +1,16 @@
 /* ======== ESTILO GENERAL ======== */
+/* En tu archivo CSS (ej. styles.css) */
+
 body {
+    background-image: url('https://wallpapers.com/images/hd/4k-plane-in-the-sky-sraa8sshp7bou1p9.jpg'); /* <-- Aquí va la URL de tu imagen */
+    background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
+    background-position: center center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-attachment: fixed; /* Opcional: fija la imagen para que no se mueva al hacer scroll */
     font-family: 'Segoe UI', Arial, sans-serif;
     margin: 0;
-    padding: 0;
-    background: linear-gradient(135deg, #e4ebf5 0%, #f7fafd 100%);
+    padding: 30px 0;
+    padding-bottom: 20px;
     color: #2c3e50;
     min-height: 100vh;
 }
@@ -11,13 +18,12 @@ body {
 /* ======== HEADER ======== */
 .container-body-head {
     width: 100%;
-    background-color: #e4ebf5;
     box-shadow: 0px 4px 16px rgba(44,62,80,0.10);
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
-    padding: 18px 0;
+    padding: 30px 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
