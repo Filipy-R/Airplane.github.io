@@ -2,7 +2,6 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-// ...tu código...
 
 $db = new PDO('sqlite:../DataBase/aviones.db');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -19,7 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bindParam(':mensaje', $mensaje, PDO::PARAM_STR);
 
     if ($stmt->execute()) {
-        // Guardar en archivo txt (en la misma carpeta que contacto.php)
         $log = "[" . date('Y-m-d H:i:s') . "] Nombre: $nombre | Email: $email\nMensaje: $mensaje\n--------------------------\n";
         file_put_contents(__DIR__ . '/mensajes_contacto.txt', $log, FILE_APPEND | LOCK_EX);
 

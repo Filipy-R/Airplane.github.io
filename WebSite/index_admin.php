@@ -7,47 +7,24 @@ if (!isset($_SESSION['user_id']) || ($_SESSION['user_role'] ?? '') !== 'admin') 
     exit();
 }
 
-// Conexión a aviones.db para todo
+// Conexión a las bases de datos
 try {
-    $db = new PDO('sqlite:../DataBase/aviones.db');
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $dbAviones = new PDO('sqlite:../DataBase/aviones.db');
+    $dbAviones->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $dbUsuarios = new PDO('sqlite:../DataBase/usuarios.db');
+    $dbUsuarios->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $dbAerolineas = new PDO('sqlite:../DataBase/aerolineas.db');
+    $dbAerolineas->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    die("Error de conexión a aviones.db: " . $e->getMessage());
+    die("Error de conexión a la base de datos: " . $e->getMessage());
 }
 
-// Crear tabla usuarios si no existe en aviones.db
-$db->exec("CREATE TABLE IF NOT EXISTS usuarios (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre TEXT NOT NULL,
-    email TEXT NOT NULL UNIQUE,
-    password TEXT NOT NULL,
-    rol VARCHAR(50) NOT NULL DEFAULT 'usuario'
-);");
-
-// Crear tabla fabricantes si no existe en aviones.db
-$db->exec("CREATE TABLE IF NOT EXISTS fabricantes (
-    fab_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    fab_nom TEXT NOT NULL,
-    fab_imagen TEXT NOT NULL
-);");
-
-// Crear tabla modelos_aviones si no existe en aviones.db
-$db->exec("CREATE TABLE IF NOT EXISTS modelos_aviones (
-    mod_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    mod_nom TEXT NOT NULL,
-    mod_descripcio TEXT NOT NULL,
-    mod_imagen TEXT,
-    fecha_lanzamiento TEXT,
-    velocidad_maxima INTEGER,
-    fab_id INTEGER NOT NULL,
-    FOREIGN KEY(fab_id) REFERENCES fabricantes(fab_id)
-);");
-
-// Mensajes
 $message = '';
 $error = '';
 
-// Añadir fabricante
+// ------------------- FABRICANTES (aviones.db) -------------------
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_fabricante'])) {
     $fab_nom = trim($_POST['fab_nom'] ?? '');
     $fab_imagen = trim($_POST['fab_imagen'] ?? '');
@@ -56,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_fabricante'])) {
         $error = "Nombre y URL de imagen son obligatorios.";
     } else {
         try {
-            $stmt = $db->prepare("INSERT INTO fabricantes (fab_nom, fab_imagen) VALUES (:fab_nom, :fab_imagen)");
+            $stmt = $dbAviones->prepare("INSERT INTO fabricantes (fab_nom, fab_imagen) VALUES (:fab_nom, :fab_imagen)");
             $stmt->bindParam(':fab_nom', $fab_nom, PDO::PARAM_STR);
             $stmt->bindParam(':fab_imagen', $fab_imagen, PDO::PARAM_STR);
             $stmt->execute();
@@ -67,7 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_fabricante'])) {
     }
 }
 
-// Actualizar fabricante
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['update_fabricante'])) {
     $fab_id = (int)($_POST['fab_id'] ?? 0);
     $fab_nom = trim($_POST['fab_nom'] ?? '');
@@ -77,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['update_fabricante']))
         $error = "ID, nombre y URL de imagen son obligatorios para actualizar.";
     } else {
         try {
-            $stmt = $db->prepare("UPDATE fabricantes SET fab_nom = :fab_nom, fab_imagen = :fab_imagen WHERE fab_id = :fab_id");
+            $stmt = $dbAviones->prepare("UPDATE fabricantes SET fab_nom = :fab_nom, fab_imagen = :fab_imagen WHERE fab_id = :fab_id");
             $stmt->bindParam(':fab_nom', $fab_nom, PDO::PARAM_STR);
             $stmt->bindParam(':fab_imagen', $fab_imagen, PDO::PARAM_STR);
             $stmt->bindParam(':fab_id', $fab_id, PDO::PARAM_INT);
@@ -89,12 +65,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['update_fabricante']))
     }
 }
 
-// Eliminar fabricante
 if ($_SERVER["REQUEST_METHOD"] === "GET" && ($_GET['action'] ?? '') === 'delete_fabricante' && isset($_GET['id'])) {
     $fab_id = (int)$_GET['id'];
     if ($fab_id > 0) {
         try {
-            $stmt = $db->prepare("DELETE FROM fabricantes WHERE fab_id = :fab_id");
+            $stmt = $dbAviones->prepare("DELETE FROM fabricantes WHERE fab_id = :fab_id");
             $stmt->bindParam(':fab_id', $fab_id, PDO::PARAM_INT);
             $stmt->execute();
             $message = "Fabricante eliminado exitosamente.";
@@ -109,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && ($_GET['action'] ?? '') === 'delete_
 // Obtener fabricantes
 $fabricantes = [];
 try {
-    $result = $db->query("SELECT fab_id, fab_nom, fab_imagen FROM fabricantes ORDER BY fab_nom");
+    $result = $dbAviones->query("SELECT fab_id, fab_nom, fab_imagen FROM fabricantes ORDER BY fab_nom");
     while ($fab = $result->fetch(PDO::FETCH_ASSOC)) {
         $fabricantes[] = $fab;
     }
@@ -117,8 +92,7 @@ try {
     $error = "Error al cargar fabricantes: " . $e->getMessage();
 }
 
-// ------------------- MODELOS DE AVIONES -------------------
-// Añadir modelo de avión
+// ------------------- MODELOS DE AVIONES (aviones.db) -------------------
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_modelo'])) {
     $mod_nom = trim($_POST['modelo_nom'] ?? '');
     $mod_imagen = trim($_POST['modelo_img'] ?? '');
@@ -132,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_modelo'])) {
         $error = "Todos los campos son obligatorios para el modelo.";
     } else {
         try {
-            $stmt = $db->prepare("INSERT INTO modelos_aviones (mod_nom, mod_imagen, fab_id, mod_descripcio, fecha_lanzamiento, velocidad_maxima) VALUES (:mod_nom, :mod_imagen, :fab_id, :mod_descripcio, :fecha_lanzamiento, :velocidad_maxima)");
+            $stmt = $dbAviones->prepare("INSERT INTO modelos_aviones (mod_nom, mod_imagen, fab_id, mod_descripcio, fecha_lanzamiento, velocidad_maxima) VALUES (:mod_nom, :mod_imagen, :fab_id, :mod_descripcio, :fecha_lanzamiento, :velocidad_maxima)");
             $stmt->bindParam(':mod_nom', $mod_nom, PDO::PARAM_STR);
             $stmt->bindParam(':mod_imagen', $mod_imagen, PDO::PARAM_STR);
             $stmt->bindParam(':fab_id', $fab_id, PDO::PARAM_INT);
@@ -147,7 +121,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_modelo'])) {
     }
 }
 
-// Actualizar modelo de avión
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['update_modelo'])) {
     $mod_id = (int)($_POST['modelo_id'] ?? 0);
     $mod_nom = trim($_POST['modelo_nom'] ?? '');
@@ -162,7 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['update_modelo'])) {
         $error = "Todos los campos son obligatorios para actualizar el modelo.";
     } else {
         try {
-            $stmt = $db->prepare("UPDATE modelos_aviones SET mod_nom = :mod_nom, mod_imagen = :mod_imagen, fab_id = :fab_id, mod_descripcio = :mod_descripcio, fecha_lanzamiento = :fecha_lanzamiento, velocidad_maxima = :velocidad_maxima WHERE mod_id = :mod_id");
+            $stmt = $dbAviones->prepare("UPDATE modelos_aviones SET mod_nom = :mod_nom, mod_imagen = :mod_imagen, fab_id = :fab_id, mod_descripcio = :mod_descripcio, fecha_lanzamiento = :fecha_lanzamiento, velocidad_maxima = :velocidad_maxima WHERE mod_id = :mod_id");
             $stmt->bindParam(':mod_nom', $mod_nom, PDO::PARAM_STR);
             $stmt->bindParam(':mod_imagen', $mod_imagen, PDO::PARAM_STR);
             $stmt->bindParam(':fab_id', $fab_id, PDO::PARAM_INT);
@@ -178,12 +151,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['update_modelo'])) {
     }
 }
 
-// Eliminar modelo de avión
 if ($_SERVER["REQUEST_METHOD"] === "GET" && ($_GET['action'] ?? '') === 'delete_modelo' && isset($_GET['id'])) {
     $mod_id = (int)$_GET['id'];
     if ($mod_id > 0) {
         try {
-            $stmt = $db->prepare("DELETE FROM modelos_aviones WHERE mod_id = :mod_id");
+            $stmt = $dbAviones->prepare("DELETE FROM modelos_aviones WHERE mod_id = :mod_id");
             $stmt->bindParam(':mod_id', $mod_id, PDO::PARAM_INT);
             $stmt->execute();
             $message = "Modelo eliminado exitosamente.";
@@ -198,7 +170,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && ($_GET['action'] ?? '') === 'delete_
 // Obtener modelos de aviones
 $modelos = [];
 try {
-    $result = $db->query("SELECT m.mod_id, m.mod_nom, m.mod_descripcio, m.mod_imagen, m.fecha_lanzamiento, m.velocidad_maxima, f.fab_nom, m.fab_id 
+    $result = $dbAviones->query("SELECT m.mod_id, m.mod_nom, m.mod_descripcio, m.mod_imagen, m.fecha_lanzamiento, m.velocidad_maxima, f.fab_nom, m.fab_id 
                           FROM modelos_aviones m 
                           JOIN fabricantes f ON m.fab_id = f.fab_id 
                           ORDER BY m.mod_nom");
@@ -209,10 +181,10 @@ try {
     $error = "Error al cargar modelos: " . $e->getMessage();
 }
 
-// Obtener usuarios para gestión
+// ------------------- USUARIOS (usuarios.db) -------------------
 $usuarios = [];
 try {
-    $result = $db->query("SELECT id, nombre, email, rol FROM usuarios ORDER BY nombre");
+    $result = $dbUsuarios->query("SELECT id, nombre, email, rol FROM usuarios ORDER BY nombre");
     while ($user = $result->fetch(PDO::FETCH_ASSOC)) {
         $usuarios[] = $user;
     }
@@ -220,13 +192,12 @@ try {
     $error = "Error al cargar usuarios: " . $e->getMessage();
 }
 
-// Cambiar rol de usuario
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['change_role'])) {
     $user_id = (int)($_POST['user_id'] ?? 0);
     $new_role = $_POST['new_role'] ?? 'usuario';
     if ($user_id > 0 && in_array($new_role, ['usuario', 'admin', 'administrador'])) {
         try {
-            $stmt = $db->prepare("UPDATE usuarios SET rol = :rol WHERE id = :id");
+            $stmt = $dbUsuarios->prepare("UPDATE usuarios SET rol = :rol WHERE id = :id");
             $stmt->bindParam(':rol', $new_role, PDO::PARAM_STR);
             $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
             $stmt->execute();
@@ -238,13 +209,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['change_role'])) {
         $error = "Datos inválidos para cambiar rol.";
     }
 }
-
-// Eliminar usuario (no permite eliminarse a sí mismo)
-if ($_SERVER["REQUEST_METHOD"] === "GET" && ($_GET['action'] ?? '') === 'delete_user' && isset($_GET['id'])) {
+  if ($_SERVER["REQUEST_METHOD"] === "GET" && ($_GET['action'] ?? '') === 'delete_user' && isset($_GET['id'])) {
     $user_id = (int)$_GET['id'];
     if ($user_id > 0 && $user_id != $_SESSION['user_id']) {
         try {
-            $stmt = $db->prepare("DELETE FROM usuarios WHERE id = :id");
+            $stmt = $dbUsuarios->prepare("DELETE FROM usuarios WHERE id = :id");
             $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
             $stmt->execute();
             $message = "Usuario eliminado exitosamente.";
@@ -255,7 +224,19 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && ($_GET['action'] ?? '') === 'delete_
         $error = "No puedes eliminar tu propio usuario o ID inválido.";
     }
 }
+// ------------------- AEROLÍNEAS (aerolineas.db) -------------------
+// Ejemplo: obtener lista de aerolíneas
+$aerolineas = [];
+try {
+    $result = $dbAerolineas->query("SELECT * FROM aerolineas ORDER BY nombre");
+    while ($aero = $result->fetch(PDO::FETCH_ASSOC)) {
+        $aerolineas[] = $aero;
+    }
+} catch (PDOException $e) {
+    $error = "Error al cargar aerolíneas: " . $e->getMessage();
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
