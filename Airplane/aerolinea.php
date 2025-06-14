@@ -11,7 +11,13 @@ $result = $db->query("SELECT * FROM aerolineas ORDER BY pais ASC");
     <title>Aerolíneas (SQLite)</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <style>
-        body { background: #f7fafd; }
+        body {
+            background-image: url('https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHBsYW5lJTIwd2FsbHBhcGVyfGVufDB8fDB8fHww');
+            background-repeat: no-repeat; /* Stops the image from repeating */
+            background-size: cover;      /* Scales the image to cover the entire background */
+            background-position: center; /* Centers the image */
+            background-attachment: fixed; /* (Optional) Keeps the image fixed when scrolling */
+        }
         h1 { text-align: center; color: #2980b9; font-weight: 900; margin-top: 40px; }
         table { margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 4px 18px rgba(44,62,80,0.10);}
         th { background: #e4ebf5; color: #1c5d8c; font-weight: 800; }

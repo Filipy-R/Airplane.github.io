@@ -66,8 +66,7 @@
                     </div>
                 </div>
 
-                 <button id="boton-login" type="button" onclick="sanitizeInput()">Login</button>
-                <script src="../loginLogout.proc.php"></script>
+                 <button id="boton-login" type="button">Login</button>
                 <button id="boton-suscribir" type="button" onclick="abrirModalSuscribir()">Suscribirse</button>
             </nav>
         </div>
@@ -122,6 +121,10 @@
                 cerrarModalSuscribir();
             }
         });
+                document.getElementById('boton-login').addEventListener('click', function() {
+            window.location.href = '/WebSite/login.php';
+        });
+
     </script>
 </body>
 </html>

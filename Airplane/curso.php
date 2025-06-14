@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Curso de Piloto | FlightAir</title>
-    <link rel="stylesheet" href="Styles/curso.css">
+    <link rel="stylesheet" href="StyleAirplane/curso.css">
 
 </head>
 <body>
@@ -73,7 +73,6 @@
             </div>
         </section>
     </main>
-
-    <?php include("Includes/footer.html"); ?>
+    <?php include("../WebSite/Includes/footer.html"); ?>
 </body>
 </html>

@@ -16,16 +16,6 @@ $db->exec("CREATE TABLE IF NOT EXISTS fabricantes (
     fab_imagen TEXT NOT NULL
 );");
 
-// Insertar datos en la tabla fabricantes (Boeing y Airbus)
-$db->exec("INSERT INTO fabricantes (fab_nom, fab_imagen) VALUES 
-('Boeing','https://media.istockphoto.com/id/517851883/es/foto/boing-747-en-vuelo.jpg?s=612x612&w=0&k=20&c=k5HxEvfI3_9QIqKfrLNY9BFHzQsLz8JMmvL0JcEWhY8='),
-('Airbus', 'https://t3.ftcdn.net/jpg/05/55/34/62/360_F_555346287_MhBuFKC7YJqVhSPowlY03DcNpqmDKldF.jpg'),
-('Embraer', 'https://storage.googleapis.com/site.esss.co/bcd8b658-2019-04-08-thumb-embraer.jpg'),
-('Bombardier', 'https://imagenes.20minutos.es/files/image_1920_1080/uploads/imagenes/2025/04/11/bombardier-global-8000.jpeg'),
-('Otros modelos', 'https://aeroin.net/wp-content/uploads/2021/07/Il62.jpg')
-;");
-
-
 // Crear la tabla modelos_aviones si no existe (ahora con fecha_lanzamiento y velocidad_maxima)
 $db->exec("CREATE TABLE IF NOT EXISTS modelos_aviones (
     mod_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -37,6 +27,18 @@ $db->exec("CREATE TABLE IF NOT EXISTS modelos_aviones (
     fab_id INTEGER NOT NULL,
     FOREIGN KEY(fab_id) REFERENCES fabricantes(fab_id)
 );");
+
+// Insertar datos en la tabla fabricantes (Boeing y Airbus)
+$db->exec("INSERT INTO fabricantes (fab_nom, fab_imagen) VALUES 
+('Boeing','https://media.istockphoto.com/id/517851883/es/foto/boing-747-en-vuelo.jpg?s=612x612&w=0&k=20&c=k5HxEvfI3_9QIqKfrLNY9BFHzQsLz8JMmvL0JcEWhY8='),
+('Airbus', 'https://t3.ftcdn.net/jpg/05/55/34/62/360_F_555346287_MhBuFKC7YJqVhSPowlY03DcNpqmDKldF.jpg'),
+('Embraer', 'https://storage.googleapis.com/site.esss.co/bcd8b658-2019-04-08-thumb-embraer.jpg'),
+('Bombardier', 'https://imagenes.20minutos.es/files/image_1920_1080/uploads/imagenes/2025/04/11/bombardier-global-8000.jpeg'),
+('Otros modelos', 'https://aeroin.net/wp-content/uploads/2021/07/Il62.jpg')
+;");
+
+
+
 
 // Insertar datos en la tabla modelos_aviones (con fecha de lanzamiento y velocidad máxima)
 $db->exec("INSERT INTO modelos_aviones (mod_nom, mod_descripcio, mod_imagen, fecha_lanzamiento, velocidad_maxima, fab_id) 
@@ -106,6 +108,14 @@ $db->exec("CREATE TABLE IF NOT EXISTS contactos (
     email TEXT NOT NULL,
     mensaje TEXT NOT NULL
 );");
+$db->exec("INSERT INTO contactos (nombre, email, mensaje) VALUES ('Juan Pérez', 'juan.perez@example.com', 'Me gustaría obtener más información sobre los vuelos a Madrid.');");
+  
+
+$db->exec("INSERT INTO contactos (nombre, email, mensaje) VALUES ('María García', 'maria.garcia@otroejemplo.net', 'Tengo una consulta sobre un paquete vacacional específico.');");
+
+
+$db->exec("INSERT INTO contactos (nombre, email, mensaje) VALUES ('Pedro López', 'pedro.lopez@dominio.org', 'Necesito soporte técnico con la reserva que acabo de hacer.');");
+
 
 // Cerrar la conexión
 $db->close();

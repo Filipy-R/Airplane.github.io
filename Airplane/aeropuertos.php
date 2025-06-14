@@ -20,20 +20,7 @@ usort($airports, function($a, $b) {
     <meta charset="UTF-8">
     <title>Listado de Aeropuertos</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <style>
-        body { background: #f7fafd; }
-        h1 { color: #2980b9; font-weight: 900; margin: 40px 0 24px 0; text-align: center; }
-        .table-container { max-width: 1100px; margin: 0 auto 40px auto; background: #fff; border-radius: 18px; box-shadow: 0 8px 32px rgba(44,62,80,0.13); padding: 32px 18px; }
-        table { width: 100%; }
-        th { background: #e4ebf5; color: #1c5d8c; font-weight: 800; text-align: center; }
-        td { text-align: center; vertical-align: middle; }
-        tr:nth-child(even) { background: #f7fafd; }
-        @media (max-width: 900px) {
-            .table-container { padding: 10px 2px; }
-            th, td { font-size: 0.95em; }
-        }
-        .small-text { font-size: 0.95em; color: #888; }
-    </style>
+    <link rel="stylesheet" href="StyleAirplane/aeropuerto.css">
 </head>
 <body>
     <?php include("../WebSite/Includes/header.html"); ?>

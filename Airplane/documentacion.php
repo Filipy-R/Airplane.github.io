@@ -4,84 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Requisitos para el Curso de Piloto | FlightAir</title>
-    <link rel="stylesheet" href="../WebSite/Includes/Style/curso.css">
-    <style>
-        .req-banner {
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto 36px auto;
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 4px 24px rgba(44,62,80,0.10);
-        }
-        .req-banner img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            display: block;
-        }
-       .requisitos-main {
-            max-width: 1100px;
-            background: #fff;
-            border-radius: 14px;
-            box-shadow: 0 4px 24px rgba(44,62,80,0.07);
-            padding: 32px 18px 40px 18px;
-        }
+    <link rel="stylesheet" href="StyleAirplane/documentacion.css">
 
-        .req-banner {
-            margin-top: 200px;
-        }
-        .requisitos-main h1 {
-            color: #2980b9;
-            text-align: center;
-            margin-bottom: 18px;
-            font-size: 2.1em;
-        }
-        .requisitos-main h2 {
-            color: #1c5d8c;
-            margin-top: 32px;
-            margin-bottom: 10px;
-            font-size: 1.18em;
-        }
-        .requisitos-main ul, .requisitos-main ol {
-            margin: 0 0 0 22px;
-            color: #4a4647;
-            font-size: 1.08em;
-        }
-        .requisitos-main li {
-            margin-bottom: 8px;
-        }
-        .requisitos-main .destacado {
-            background: #f1f6fa;
-            border-left: 5px solid #2980b9;
-            padding: 14px 18px;
-            border-radius: 8px;
-            margin: 24px 0;
-            color: #1c5d8c;
-            font-weight: 500;
-        }
-        .requisitos-main .faq-link {
-            color: #2980b9;
-            text-decoration: underline;
-            font-weight: 500;
-        }
-        @media (max-width: 900px) {
-            .req-banner, .requisitos-main {
-                max-width: 98vw;
-            }
-            .req-banner img {
-                height: 120px;
-            }
-        }
-        @media (max-width: 600px) {
-            .requisitos-main {
-                padding: 12px 2vw 24px 2vw;
-            }
-            .req-banner img {
-                height: 70px;
-            }
-        }
-    </style>
 </head>
 <body>
     <?php include("../WebSite/Includes/header.html"); ?>

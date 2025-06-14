@@ -1,6 +1,6 @@
 /* Fondo general y tipografía */
 body {
-    background: linear-gradient(135deg, #e4ebf5 0%, #f7fafd 100%);
+    background-color: #bfc9d1;
     min-height: 100vh;
     font-family: 'Segoe UI', Arial, sans-serif;
     color: #2c3e50;

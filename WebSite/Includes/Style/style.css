@@ -1,12 +1,11 @@
 /* ======== ESTILO GENERAL ======== */
-/* En tu archivo CSS (ej. styles.css) */
 
 body {
-    background-image: url('https://wallpapers.com/images/hd/4k-plane-in-the-sky-sraa8sshp7bou1p9.jpg'); /* <-- Aquí va la URL de tu imagen */
-    background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
-    background-position: center center; /* Centra la imagen */
-    background-repeat: no-repeat; /* Evita que la imagen se repita */
-    background-attachment: fixed; /* Opcional: fija la imagen para que no se mueva al hacer scroll */
+    background-image: url('https://wallpapers.com/images/hd/4k-plane-in-the-sky-sraa8sshp7bou1p9.jpg'); 
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     font-family: 'Segoe UI', Arial, sans-serif;
     margin: 0;
     padding: 30px 0;

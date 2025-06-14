@@ -4,50 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preguntas Frecuentes | FlightAir</title>
-    <link rel="stylesheet" href="../WebSite/Includes/Style/curso.css">
-    <style>
-        .faq-main {
-            max-width: 900px;
-            margin: 200px auto 40px auto;
-            background: #fff;
-            border-radius: 14px;
-            box-shadow: 0 4px 24px rgba(44,62,80,0.07);
-            padding: 32px 18px 40px 18px;
-        }
-        .faq-main h1 {
-            color: #2980b9;
-            text-align: center;
-            margin-bottom: 24px;
-            font-size: 2em;
-        }
-        .faq-list {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-        .faq-item {
-            margin-bottom: 28px;
-            border-bottom: 1px solid #e4ebf5;
-            padding-bottom: 18px;
-        }
-        .faq-q {
-            color: #1c5d8c;
-            font-weight: 600;
-            font-size: 1.12em;
-            margin-bottom: 6px;
-        }
-        .faq-a {
-            color: #4a4647;
-            font-size: 1em;
-            margin-left: 0;
-        }
-        @media (max-width: 700px) {
-            .faq-main {
-                margin: 120px 2vw 24px 2vw;
-                padding: 18px 2vw 24px 2vw;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="StyleAirplane/faq.css">
+  
 </head>
 <body>
     <?php include("../WebSite/Includes/header.html"); ?>
