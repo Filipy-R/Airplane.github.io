@@ -3,11 +3,11 @@
 include("../WebSite/Includes/db_connect.php");
 include("../WebSite/Includes/header.html");
 
-// Obtener todos los modelos de aviones de otros fabricantes (fab_id = 5)
+// Obtener todos los modelos de aviones Bombardier (fab_id = 4)
 $query = "SELECT m.mod_nom, m.mod_descripcio, m.mod_imagen, m.fecha_lanzamiento, m.velocidad_maxima, f.fab_nom
           FROM modelos_aviones m
           JOIN fabricantes f ON m.fab_id = f.fab_id
-          WHERE m.fab_id = 5";
+          WHERE m.fab_id = 4";
 $result = $db->query($query);
 ?>
 <!DOCTYPE html>
@@ -15,7 +15,7 @@ $result = $db->query($query);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Otros modelos | FlightAir</title>
+    <title>Modelos Bombardier | FlightAir</title>
     <link rel="stylesheet" href="../WebSite/Includes/Style/modelAirplane.css">
     <style>
         .modal-img-bg {
@@ -93,8 +93,8 @@ $result = $db->query($query);
 </head>
 <body>
     <main>
-        <h1 class="title-modelos" id="titulo-otros">Modelos de Otros Aviones</h1>
-        <div class="container" id="container-modelos-Otros">
+        <h1 class="title-modelos" id="titulo-bombardier">Modelos de Aviones Bombardier</h1>
+        <div class="container" id="container-modelos-Bombardier">
             <?php
             while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
                 echo "<div class='aircraft-card' data-modelo='" . htmlspecialchars($row['mod_nom']) . "'>";
@@ -156,3 +156,5 @@ $result = $db->query($query);
 </body>
 </html>
 <?php
+$db->close();
+?>
