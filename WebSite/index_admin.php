@@ -243,7 +243,7 @@ try {
     <meta charset="UTF-8">
     <title>Panel de Administración - FlightAir</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Includes/Style/style.css">
+    <link rel="stylesheet" href="Includes/Style/style.css">
     <style>
         body {
             background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
