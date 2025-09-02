@@ -51,7 +51,7 @@
                 </li>
                 <li class="faq-item">
                     <div class="faq-q">¿Dónde puedo obtener más información?</div>
-                    <div class="faq-a">Puedes consultar la sección de <a href="documentacion.php" style="color:#2980b9;text-decoration:underline;">requisitos</a> o <a href="contacto.php" style="color:#2980b9;text-decoration:underline;">contactarnos</a> para resolver tus dudas.</div>
+                    <div class="faq-a">Puedes consultar la sección de <a href="documentacion.php" style="color:#2980b9;text-decoration:underline;">requisitos</a> o <a href="WebSite/contacto.php" style="color:#2980b9;text-decoration:underline;">contactarnos</a> para resolver tus dudas.</div>
                 </li>
             </ul>
         </section>

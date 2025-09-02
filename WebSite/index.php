@@ -49,7 +49,7 @@
                     if (strtolower($fab['fab_nom']) == "boeing") $url = "/Airplane/boing.php";
                     if (strtolower($fab['fab_nom']) == "embraer") $url = "/Airplane/embraer.php";
                     if (strtolower($fab['fab_nom']) == "bombardier") $url = "/Airplane/bombardier.php";
-                    if (strtolower($fab['fab_nom']) == "otros") $url = "/Airplane/otros.php";
+                    if (strtolower($fab['fab_nom']) == "otros") $url = "/Airplane/otrosAviones.php";
 
                     // Puedes agregar más fabricantes aquí si los tienes
                     echo '<a href="'.$url.'" class="card-modelo">';

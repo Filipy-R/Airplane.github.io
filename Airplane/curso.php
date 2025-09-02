@@ -69,7 +69,7 @@
                     <li><strong>¿Dónde puedo estudiar?</strong> En escuelas de aviación certificadas por la autoridad aeronáutica española.</li>
                     <li><strong>¿Cuánto cuesta?</strong> La inversión es importante y varía según el programa y la escuela.</li>
                 </ul>
-                <p>¿Tienes más dudas? <a href="contacto.php">Contáctanos</a> o revisa nuestra <a href="faq.php">sección de preguntas frecuentes</a>.</p>
+                <p>¿Tienes más dudas? <a href="/WebSite/contacto.php">Contáctanos</a> o revisa nuestra <a href="faq.php">sección de preguntas frecuentes</a>.</p>
             </div>
         </section>
     </main>
